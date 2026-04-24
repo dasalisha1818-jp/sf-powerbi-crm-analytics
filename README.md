@@ -127,5 +127,3 @@ sf-powerbi-crm-analytics/
 
 ---
 
-## License
-MIT
