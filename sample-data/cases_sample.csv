@@ -1,0 +1,11 @@
+Id,CaseNumber,Subject,Status,Priority,Origin,OwnerName,AccountName,CreatedDate,ClosedDate,IsClosed,IsEscalated,SLABreached,SLAStatusCategory,ResolutionHours,DayOfWeek
+5001,CS-10001,System Login Failure,Closed,Critical,Phone,Alisha Das,Intel Corp,2025-01-10 09:00:00,2025-01-10 12:30:00,TRUE,FALSE,FALSE,On Track,3.5,Friday
+5002,CS-10002,Data Export Error,Open,High,Email,Priya Sharma,Intel Corp,2025-01-12 11:00:00,,FALSE,FALSE,TRUE,Breached,,Sunday
+5003,CS-10003,Dashboard Not Loading,Closed,Medium,Web,Ravi Kumar,Accenture,2025-01-13 08:30:00,2025-01-14 16:00:00,TRUE,FALSE,FALSE,On Track,31.5,Monday
+5004,CS-10004,API Timeout Critical,Closed,Critical,Phone,Alisha Das,Intel Corp,2025-01-14 07:00:00,2025-01-14 10:00:00,TRUE,TRUE,TRUE,Breached,3,Tuesday
+5005,CS-10005,Report Incorrect Data,Open,High,Email,Priya Sharma,TCS,2025-01-15 14:00:00,,FALSE,FALSE,FALSE,At Risk,,Wednesday
+5006,CS-10006,Integration Sync Issue,Closed,High,Web,Ravi Kumar,HCL,2025-01-16 09:30:00,2025-01-17 09:30:00,TRUE,FALSE,FALSE,On Track,24,Thursday
+5007,CS-10007,User Provisioning Delay,Open,Medium,Email,Alisha Das,IBM,2025-01-17 13:00:00,,FALSE,FALSE,FALSE,On Track,,Friday
+5008,CS-10008,SLA Dashboard Missing,Closed,Critical,Phone,Priya Sharma,Infosys,2025-01-18 08:00:00,2025-01-18 11:45:00,TRUE,FALSE,FALSE,On Track,3.75,Saturday
+5009,CS-10009,Bulk Import Failure,Open,High,Web,Ravi Kumar,Intel Corp,2025-01-19 10:00:00,,FALSE,TRUE,TRUE,Breached,,Sunday
+5010,CS-10010,Permission Set Issue,Closed,Medium,Email,Alisha Das,Accenture,2025-01-20 12:00:00,2025-01-21 18:00:00,TRUE,FALSE,FALSE,On Track,30,Monday

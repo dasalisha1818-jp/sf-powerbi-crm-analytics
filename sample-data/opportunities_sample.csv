@@ -1,0 +1,11 @@
+Id,Name,AccountName,OwnerName,StageName,Amount,CloseDate,CreatedDate,Probability,ForecastCategory,LeadSource,IsClosed,IsWon,FiscalQuarter,FiscalYear
+006Xx001,Intel Server Deal Q1,Intel Corp,Alisha Das,Closed Won,250000,2025-01-15,2024-10-01,100,Closed,Web,TRUE,TRUE,1,2025
+006Xx002,Intel Cloud Services,Intel Corp,Priya Sharma,Proposal/Price Quote,180000,2025-04-30,2024-12-01,60,Best Case,Partner,FALSE,FALSE,2,2025
+006Xx003,Intel DevOps Platform,Intel Corp,Ravi Kumar,Negotiation/Review,320000,2025-03-31,2024-11-15,80,Commit,Event,FALSE,FALSE,1,2025
+006Xx004,Accenture Data Lake,Accenture,Alisha Das,Closed Won,95000,2025-02-28,2024-09-10,100,Closed,Email,TRUE,TRUE,1,2025
+006Xx005,Accenture AI Suite,Accenture,Priya Sharma,Closed Lost,120000,2025-01-31,2024-10-20,0,Omitted,Cold Call,TRUE,FALSE,1,2025
+006Xx006,TCS Integration Hub,TCS,Ravi Kumar,Qualification,75000,2025-05-31,2025-01-05,30,Pipeline,Web,FALSE,FALSE,2,2025
+006Xx007,Wipro Analytics,Wipro,Alisha Das,Value Proposition,200000,2025-04-15,2024-12-20,50,Best Case,Trade Show,FALSE,FALSE,2,2025
+006Xx008,HCL Security Platform,HCL,Priya Sharma,Closed Won,410000,2025-03-10,2024-08-01,100,Closed,Web,TRUE,TRUE,1,2025
+006Xx009,Infosys CRM Upgrade,Infosys,Ravi Kumar,Needs Analysis,88000,2025-06-30,2025-01-20,20,Pipeline,Partner,FALSE,FALSE,2,2025
+006Xx010,IBM Cloud Migration,IBM,Alisha Das,Proposal/Price Quote,560000,2025-05-15,2025-01-10,65,Commit,Event,FALSE,FALSE,2,2025

@@ -1,0 +1,88 @@
+// sales_measures.dax
+// ------------------
+// All DAX measures for the Executive Sales Dashboard in Power BI.
+// Paste these into Power BI Desktop: Modeling → New Measure
+
+
+// ── Pipeline KPIs ──────────────────────────────────────────────────────────
+
+Total Pipeline Value =
+CALCULATE(
+    SUM(fact_Opportunities[Amount]),
+    fact_Opportunities[IsClosed] = FALSE()
+)
+
+Closed Won Revenue =
+CALCULATE(
+    SUM(fact_Opportunities[Amount]),
+    fact_Opportunities[IsWon] = TRUE()
+)
+
+Win Rate % =
+DIVIDE(
+    CALCULATE(COUNT(fact_Opportunities[Id]), fact_Opportunities[IsWon] = TRUE()),
+    CALCULATE(COUNT(fact_Opportunities[Id]), fact_Opportunities[IsClosed] = TRUE()),
+    0
+)
+
+Average Deal Size =
+CALCULATE(
+    AVERAGE(fact_Opportunities[Amount]),
+    fact_Opportunities[IsWon] = TRUE()
+)
+
+// ── Target Attainment ──────────────────────────────────────────────────────
+
+Revenue Target = 5000000   // Replace with your actual target or use a parameter table
+
+Target Attainment % =
+DIVIDE([Closed Won Revenue], [Revenue Target], 0)
+
+// ── MoM Trend ─────────────────────────────────────────────────────────────
+
+Revenue Previous Month =
+CALCULATE(
+    [Closed Won Revenue],
+    DATEADD(dim_Date[Date], -1, MONTH)
+)
+
+Revenue MoM Change % =
+DIVIDE(
+    [Closed Won Revenue] - [Revenue Previous Month],
+    [Revenue Previous Month],
+    0
+)
+
+// ── Forecast ──────────────────────────────────────────────────────────────
+
+Weighted Pipeline =
+SUMX(
+    fact_Opportunities,
+    fact_Opportunities[Amount] * DIVIDE(fact_Opportunities[Probability], 100, 0)
+)
+
+// ── Stage Analysis ─────────────────────────────────────────────────────────
+
+Opportunities in Stage =
+COUNT(fact_Opportunities[Id])
+
+Stage Conversion Rate =
+DIVIDE(
+    CALCULATE(COUNT(fact_Opportunities[Id]), fact_Opportunities[IsWon] = TRUE()),
+    COUNT(fact_Opportunities[Id]),
+    0
+)
+
+// ── QTD / YTD ─────────────────────────────────────────────────────────────
+
+Closed Won QTD =
+CALCULATE(
+    [Closed Won Revenue],
+    DATESQTD(dim_Date[Date])
+)
+
+Closed Won YTD =
+CALCULATE(
+    [Closed Won Revenue],
+    DATESYTD(dim_Date[Date])
+)

@@ -1,0 +1,89 @@
+// sla_measures.dax
+// ----------------
+// DAX measures for the Service SLA Performance Dashboard in Power BI.
+
+
+// ── SLA KPIs ───────────────────────────────────────────────────────────────
+
+Total Cases =
+COUNT(fact_Cases[Id])
+
+SLA Breach Count =
+CALCULATE(
+    COUNT(fact_Cases[Id]),
+    fact_Cases[SLA_Breached__c] = TRUE()
+)
+
+SLA Breach Rate % =
+DIVIDE([SLA Breach Count], [Total Cases], 0)
+
+SLA Compliance Rate % =
+1 - [SLA Breach Rate %]
+
+// ── Resolution Time ────────────────────────────────────────────────────────
+
+// Duration in hours between CreatedDate and ClosedDate
+Avg Resolution Hours =
+AVERAGEX(
+    FILTER(fact_Cases, fact_Cases[IsClosed] = TRUE()),
+    DATEDIFF(fact_Cases[CreatedDate], fact_Cases[ClosedDate], HOUR)
+)
+
+Avg Resolution Hours P1 =
+CALCULATE(
+    [Avg Resolution Hours],
+    fact_Cases[Priority] = "Critical"
+)
+
+Avg Resolution Hours P2 =
+CALCULATE(
+    [Avg Resolution Hours],
+    fact_Cases[Priority] = "High"
+)
+
+// ── Escalation ─────────────────────────────────────────────────────────────
+
+Escalation Count =
+CALCULATE(
+    COUNT(fact_Cases[Id]),
+    fact_Cases[IsEscalated] = TRUE()
+)
+
+Escalation Rate % =
+DIVIDE([Escalation Count], [Total Cases], 0)
+
+// ── Agent Productivity ─────────────────────────────────────────────────────
+
+Cases Closed per Agent =
+DIVIDE(
+    CALCULATE(COUNT(fact_Cases[Id]), fact_Cases[IsClosed] = TRUE()),
+    DISTINCTCOUNT(fact_Cases[OwnerId]),
+    0
+)
+
+// ── SLA Trend ──────────────────────────────────────────────────────────────
+
+SLA Breach Rate Previous Month =
+CALCULATE(
+    [SLA Breach Rate %],
+    DATEADD(dim_Date[Date], -1, MONTH)
+)
+
+SLA Breach MoM Change =
+[SLA Breach Rate %] - [SLA Breach Rate Previous Month]
+
+// ── Open Cases ─────────────────────────────────────────────────────────────
+
+Open Cases =
+CALCULATE(
+    COUNT(fact_Cases[Id]),
+    fact_Cases[IsClosed] = FALSE()
+)
+
+At Risk Cases =
+CALCULATE(
+    COUNT(fact_Cases[Id]),
+    fact_Cases[IsClosed] = FALSE(),
+    fact_Cases[SLA_Breached__c] = FALSE(),
+    DATEDIFF(NOW(), fact_Cases[SLA_Due_DateTime__c], HOUR) < 2
+)

@@ -1,0 +1,37 @@
+-- cases_sla.soql
+-- --------------
+-- Extracts Case SLA, resolution, and escalation data for Power BI Service Dashboard.
+--
+-- Key fields for SLA analysis:
+--   SLA_Due_DateTime__c     — custom field (from CaseSLAHandler)
+--   SLA_Breached__c         — custom checkbox
+--   Escalated__c            — custom checkbox
+--   SLA_Breach_Timestamp__c — when breach occurred
+
+SELECT
+    Id,
+    CaseNumber,
+    Subject,
+    Status,
+    Priority,
+    Origin,
+    OwnerId,
+    Owner.Name,
+    Owner.Department,
+    AccountId,
+    Account.Name,
+    CreatedDate,
+    ClosedDate,
+    LastModifiedDate,
+    IsClosed,
+    IsEscalated,
+    Escalated__c,
+    SLA_Due_DateTime__c,
+    SLA_Breached__c,
+    SLA_Breach_Timestamp__c,
+    First_Response_Due__c,
+    Type,
+    Reason
+FROM Case
+WHERE CreatedDate >= LAST_N_MONTHS:12
+ORDER BY CreatedDate DESC

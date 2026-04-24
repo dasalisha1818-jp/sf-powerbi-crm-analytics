@@ -1,0 +1,34 @@
+-- opportunities.soql
+-- ------------------
+-- Extracts pipeline and closed won opportunity data for Power BI Sales Dashboard.
+-- Used in Power BI via Salesforce Connector (Direct Query or Import mode).
+--
+-- Fields: Id, Name, AccountId, Account.Name, OwnerId, Owner.Name,
+--         StageName, Amount, CloseDate, CreatedDate, Probability,
+--         ForecastCategory, LeadSource, Type, IsClosed, IsWon
+
+SELECT
+    Id,
+    Name,
+    AccountId,
+    Account.Name,
+    OwnerId,
+    Owner.Name,
+    Owner.Department,
+    StageName,
+    Amount,
+    CloseDate,
+    CreatedDate,
+    Probability,
+    ForecastCategory,
+    LeadSource,
+    Type,
+    IsClosed,
+    IsWon,
+    CurrencyIsoCode,
+    FiscalQuarter,
+    FiscalYear,
+    LastModifiedDate
+FROM Opportunity
+WHERE CreatedDate >= LAST_N_MONTHS:12
+ORDER BY CreatedDate DESC
